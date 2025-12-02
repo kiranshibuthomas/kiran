@@ -250,25 +250,42 @@ input.addEventListener("keydown", function (event) {
       const command = input.value.trim().split(" ")[0];
       const commandArgs = input.value.trim().split(" ")[1];
       input.value = "";
-      output.innerHTML += `
-      <div style="margin-bottom: 10px;">
+      
+      // Add command echo with animation
+      const commandEcho = document.createElement('div');
+      commandEcho.className = 'command-echo';
+      commandEcho.style.marginBottom = '10px';
+      commandEcho.innerHTML = `
           <span style="color: var(--text-muted);">${prompt.innerHTML}</span> ${command} ${commandArgs || ''}
-      </div>
       `;
-        if (commandFunctions[command]) {
-          output.innerHTML += `<div style="margin-bottom: 20px;">${commandFunctions[command](`${command} ${commandArgs}`)}</div>`;
+      output.appendChild(commandEcho);
+      
+      // Add output with animation
+      if (commandFunctions[command]) {
+          const outputDiv = document.createElement('div');
+          outputDiv.className = 'output';
+          outputDiv.style.marginBottom = '20px';
+          outputDiv.innerHTML = commandFunctions[command](`${command} ${commandArgs}`);
+          output.appendChild(outputDiv);
+          
           if (postRenderFunctions[command]) {
             postRenderFunctions[command]();
           }
         } else if (command === "clear") {
           output.innerHTML = "";
       } else {
-            output.innerHTML += `
-            <div style="padding: 15px; background: rgba(239, 68, 68, 0.05); border-radius: 8px; border-left: 3px solid #ef4444; margin-bottom: 20px;">
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'output';
+            errorDiv.style.padding = '15px';
+            errorDiv.style.background = 'rgba(239, 68, 68, 0.05)';
+            errorDiv.style.borderRadius = '8px';
+            errorDiv.style.borderLeft = '3px solid #ef4444';
+            errorDiv.style.marginBottom = '20px';
+            errorDiv.innerHTML = `
                 <span class="text-red">✗ Command not found: ${command}</span><br>
                 <span class="text-gray">Type <span class="text-green">help</span> to see available commands</span>
-            </div>
             `;
+            output.appendChild(errorDiv);
         }
         scrollToBottom()
     }
@@ -304,6 +321,13 @@ input.addEventListener("keydown", function (event) {
 input.addEventListener("blur", function (event) {
     input.focus();
 });
+
+// Function to execute command from navigation
+function executeCommand(cmd) {
+    input.value = cmd;
+    const event = new KeyboardEvent('keydown', { key: 'Enter' });
+    input.dispatchEvent(event);
+}
 
 function resizeInput() {
     input.style.width = input.value.length + 1 + "ch";
