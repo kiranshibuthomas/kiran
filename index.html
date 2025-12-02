@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Suyash Thakur's Portfolio">
+    <meta name="keywords" content="Suyash Thakur, Suyash, Thakur, Portfolio, Suyash Portfolio, Suyash Thakur Portfolio">
+    <meta name="author" content="Suyash Thakur">
+    <meta name="theme-color" content="#000000">
+    <meta property="og:image"
+        content="https://res.cloudinary.com/diroilukd/image/upload/v1679785785/Screenshot_2023-03-26_at_4.38.02_AM_o54o62.png" />
+    <title>Suyash Thakur</title>
+    <link rel="stylesheet"  href="styles.css" />
+</head>
+
+<body>
+    <div class="shell" id="shell">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <div class="terminal-button close"></div>
+                    <div class="terminal-button minimize"></div>
+                    <div class="terminal-button maximize"></div>
+                </div>
+                <div class="terminal-title">portfolio@terminal ~ zsh</div>
+            </div>
+            
+            <div class="terminal-content">
+                <div id="loading" class="text-blue">
+                    <div class="loading-bar">
+                        <pre id="loading-ascii-art"></pre>
+                        <div id="loading-text"></div>
+                        <div id="fill"></div>
+                    </div>
+                </div>
+                
+                <div id="command-interface">
+                    <div class="ascii">
+                        <pre id="ascii-art"></pre>
+                    </div>
+                    <div id="output"></div>
+                </div>
+            </div>
+            
+            <div id="command-line">
+                <span id="prompt"><span class="text-green">➜</span> <span class="text-blue">~</span></span>
+                <input type="text" id="command-input" class="input" autofocus>
+                <span id="cursor">▊</span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="/commands/ascii.js" type="module"></script>
+<script src="loading.js"></script>
+<script src="script.js" type="module"></script>
